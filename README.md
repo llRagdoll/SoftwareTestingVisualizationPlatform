@@ -1,3 +1,4 @@
+# SoftwareTestingVisualizationPlatform
 # software-testing-visualization-platform
 
 ## Project setup
