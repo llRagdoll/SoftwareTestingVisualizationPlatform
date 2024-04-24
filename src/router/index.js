@@ -1,9 +1,10 @@
 import { createRouter, createWebHistory } from "vue-router";
 
+import WanNianLi from "@/views/WanNianLi.vue";
+
 const routes = [{
-    // path: '/',
-    // name: 'home',
-    // component: HomeView,
+    path: '/wannianli',
+    component: WanNianLi,
 }]
 const router = createRouter({
     history: createWebHistory(),

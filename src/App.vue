@@ -1,26 +1,32 @@
 <template>
     <div class="common-layout" style="padding: 0;">
     <el-container>
-      <el-aside width="200px">
-        <el-menu
+      <el-aside width="250px">
+        <div style="width:100%;height:100vh;background-color: #d4ebeb;">
+          <div style="padding:10%">
+          <el-menu
         active-text-color="#ffd04b"
-        background-color="#545c64"
-        class="el-menu-vertical-demo"
+        background-color="#fff"
         default-active="2"
-        text-color="#fff"
+        text-color="#3D3D3D"
         @open="handleOpen"
         @close="handleClose"
+        style="border-radius: 20px;box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);;"
+        router
+        collapse-transition="false"
+        default-expand-all="true"
+        :default-openeds="openeds"
       >
         <el-sub-menu index="1">
-          <template #title>
+          <template #title >
             <el-icon><location /></el-icon>
-            <span>Navigator One</span>
+            <span>练习题</span>
           </template>
-          <el-menu-item-group title="Group One">
-            <el-menu-item index="1-1">item one</el-menu-item>
-            <el-menu-item index="1-2">item two</el-menu-item>
+          <el-menu-item-group>
+            <el-menu-item index="/wannianli">万年历问题</el-menu-item>
+            <el-menu-item index="/triangle">判断三角形</el-menu-item>
           </el-menu-item-group>
-          <el-menu-item-group title="Group Two">
+          <el-menu-item-group>
             <el-menu-item index="1-3">item three</el-menu-item>
           </el-menu-item-group>
           <el-sub-menu index="1-4">
@@ -41,20 +47,24 @@
           <span>Navigator Four</span>
         </el-menu-item>
       </el-menu>
+    </div>
+        </div>
+       
       </el-aside>
-      <el-main>Main</el-main>
+      <el-main style="background-color: #f0f8fa;">
+        <router-view></router-view>
+      </el-main>
     </el-container>
   </div>
 </template>
 
-<script>
-
-export default {
-  name: 'App',
-  components: {
-   
-  }
-}
+<script setup>
+import { ref } from 'vue'
+import {
+  Menu as IconMenu,
+  Setting,
+} from '@element-plus/icons-vue'
+const openeds = ref(['1', '3'])
 </script>
 
 <style>
