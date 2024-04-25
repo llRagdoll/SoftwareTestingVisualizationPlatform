@@ -27,14 +27,15 @@
             <div class="run-chart">
                 <div class="input-area">
                     <p>测试输入</p>
-                    <el-input placeholder="请输入测试用例编号"></el-input>
+                    <el-input placeholder="请输入测试用例编号" style="width:90%"></el-input>
                     <p>边长1：12</p>
                     <p>边长2：12</p>
                     <p>边长3：12</p>
                     <el-button type="warning" plain class="run-button">运行</el-button>
                 </div>
                 <div class="chart-area">
-                  这是一张图
+                    <div v-show="chartType === 'bar'" id="barChart" class="chart-container" ref="barChartRef" style="width:100%;height:35vh;"></div>
+                    <div v-show="chartType === 'pie'" id="pieChart" class="chart-container" ref="pieChartRef" style="width:100%;height:35vh;"></div>
                 </div>
             </div>
         </el-col>
@@ -42,6 +43,123 @@
 </template>
 
 <script setup>
+import * as echarts from 'echarts';
+import { ref ,onMounted} from 'vue';
+
+const chartType = ref('bar');
+const noData = ref(false); 
+let commonData = {
+  '待办': 3,
+  '进行中': 4,
+  '已完成': 2,
+};
+
+const barChartRef = ref(null);
+const pieChartRef = ref(null);
+
+const getBarOption = () => ({
+    title: {
+    text: '',
+    left: 'center'
+  },
+  tooltip: {},
+  xAxis: {
+    data: Object.keys(commonData)
+  },
+  yAxis: {},
+  series: [{
+    name: '数量',
+    type: 'bar',
+    data: Object.values(commonData).map((value, index) => {
+            return {
+                value: value,
+                itemStyle: {
+                    color: index === 0 ? '#D8E5F9' : (index === 1 ? '#F2DABD' : '#DFF3DF') // 浅蓝, 浅橙, 浅绿
+                }
+            };
+        })
+  }]
+});
+
+const getPieOption = () => ({
+    title: {
+    text: '',
+    left: 'center'
+  },
+  tooltip: {
+    trigger: 'item'
+  },
+  series: [
+    {
+      name: '任务统计',
+      type: 'pie',
+      radius: '55%',
+      data: Object.entries(commonData).map(([name, value]) => {
+                let color;
+                switch (name) {
+                    case '待办任务':
+                        color = '#D8E5F9'; // 浅蓝
+                        break;
+                    case '进行中':
+                        color = '#F2DABD'; // 浅橙
+                        break;
+                    case '已完成':
+                        color = '#DFF3DF'; // 浅绿
+                        break;
+                    default:
+                        color = '#D3D3D3';
+                }
+                return { 
+                    name: name, 
+                    value: value,
+                    itemStyle: {
+                        color: color
+                    }
+                };
+            }),
+      emphasis: {
+        itemStyle: {
+          shadowBlur: 10,
+          shadowOffsetX: 0,
+          shadowColor: 'rgba(0, 0, 0, 0.5)'
+        }
+      }
+    }
+  ]
+});
+
+const initChart = (type) => {
+  // 确保图表数据存在
+  if (Object.keys(commonData).length === 0) {
+    noData.value = true;
+    return;
+  }
+  noData.value = false;
+
+  let chartDom;
+  let option;
+
+  if (type === 'bar' && barChartRef.value) {
+    chartDom = barChartRef.value;
+    option = getBarOption();
+  } else if (type === 'pie' && pieChartRef.value) {
+    chartDom = pieChartRef.value;
+    option = getPieOption();
+  } else {
+    // 如果没有找到对应的 DOM 元素，直接返回
+    return;
+  }
+
+  // 初始化 ECharts 图表
+  if (chartDom) {
+    const chartInstance = echarts.init(chartDom);
+    chartInstance.setOption(option);
+  }
+};
+
+onMounted(() => {
+  initChart(chartType.value);
+});
 const tableData = [
   {
     date: '2016-05-03',
@@ -107,7 +225,7 @@ const tableData = [
 
 .run-chart{
     width: 90%;
-    height: 93vh;
+    height: 93.5vh;
     background-color: #ffffff;
     border-radius: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
