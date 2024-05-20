@@ -23,28 +23,15 @@
             <span>练习题</span>
           </template>
           <el-menu-item-group>
-            <el-menu-item index="/wannianli">万年历问题</el-menu-item>
             <el-menu-item index="/triangle">判断三角形</el-menu-item>
+            <el-menu-item index="/wannianli">万年历问题</el-menu-item>
+            <el-menu-item index="/computersale">电脑销售系统</el-menu-item> 
           </el-menu-item-group>
-          <el-menu-item-group>
-            <el-menu-item index="1-3">item three</el-menu-item>
-          </el-menu-item-group>
-          <el-sub-menu index="1-4">
-            <template #title>item four</template>
-            <el-menu-item index="1-4-1">item one</el-menu-item>
-          </el-sub-menu>
+           
         </el-sub-menu>
-        <el-menu-item index="2">
+        <el-menu-item index="empty">
           <el-icon><icon-menu /></el-icon>
-          <span>Navigator Two</span>
-        </el-menu-item>
-        <el-menu-item index="3" disabled>
-          <el-icon><document /></el-icon>
-          <span>Navigator Three</span>
-        </el-menu-item>
-        <el-menu-item index="4">
-          <el-icon><setting /></el-icon>
-          <span>Navigator Four</span>
+          <span></span>
         </el-menu-item>
       </el-menu>
     </div>
@@ -60,10 +47,6 @@
 
 <script setup>
 import { ref } from 'vue'
-import {
-  Menu as IconMenu,
-  Setting,
-} from '@element-plus/icons-vue'
 const openeds = ref(['1', '3'])
 </script>
 

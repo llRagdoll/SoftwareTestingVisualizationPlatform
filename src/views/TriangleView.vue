@@ -3,9 +3,10 @@
         <el-col :span="15">
             <el-row style="height:30%">
                 <div class="question-card">
-                    <p class="question-title">万年历问题</p>
-                    <p class="question-content">输入三个整数y,m,d，分别表示年、月、日，输出它的下一天日期。</p>
-                    <p class="question-content">其中，年份的取值范围在1900和2100之间。</p>
+                    <p class="question-title">判断三角形</p>
+                    <p class="question-content">输入三个整数a,b,c,作为三角形三条边，输出三条边构成的三角形类型：</p>
+                    <p class="question-content">普通三角形，等边三角形，等腰三角形或不构成三角形。</p>
+                    <p class="question-content">其中，三条边都不超过1000.</p>
                 </div>
             </el-row>
             <el-row>
@@ -25,6 +26,13 @@
                                 <el-table-column prop="address" label="Address" />
                             </el-table>
                         </el-tab-pane>
+                        <el-tab-pane label="决策表法" name="third">
+                            <el-table :data="tableData" height="250" style="width: 100%">
+                                <el-table-column prop="date" label="Date" width="180" />
+                                <el-table-column prop="name" label="Name" width="180" />
+                                <el-table-column prop="address" label="Address" />
+                            </el-table>
+                        </el-tab-pane>
     
                     </el-tabs>
                 </div>
@@ -35,9 +43,9 @@
                 <div class="input-area">
                     <p style="font-weight: bold;">测试输入</p>
                     <el-input placeholder="请输入测试用例编号" style="width:80%"></el-input>
-                    <p>年：12</p>
-                    <p>月：12</p>
-                    <p>日：12</p>
+                    <p>a：12</p>
+                    <p>b：12</p>
+                    <p>c：12</p>
                     <el-button type="warning" plain class="run-button"  style="width:80%">运行</el-button>
                 </div>
                 <div class="chart-area">
@@ -234,7 +242,7 @@ const activeName = ref('first')
     background-color: #ffffff;
     border-radius: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding:10px
+    padding:20px
 }
 
 .run-chart{

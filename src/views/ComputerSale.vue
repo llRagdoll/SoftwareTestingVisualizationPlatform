@@ -3,9 +3,9 @@
         <el-col :span="15">
             <el-row style="height:30%">
                 <div class="question-card">
-                    <p class="question-title">万年历问题</p>
-                    <p class="question-content">输入三个整数y,m,d，分别表示年、月、日，输出它的下一天日期。</p>
-                    <p class="question-content">其中，年份的取值范围在1900和2100之间。</p>
+                    <p class="question-title">电脑销售系统</p>
+                    <p class="question-content">主机（25￥单位价格，每月最多销售的数量为70），显示器（30￥单位价格，每月最多销售数量为80），外设（45￥单位价格，每月最多销售的数量为90）；每个销售员每月至少销售一台完整的机器，当系统的主机这个变量接受到-1值的时候，系统自动统计该销售员本月的销售总额。当销售额小于等于1000（包括1000）按照10%提佣金，当销售额在1000-1800之间（包括1800）的时候按照15%提佣金，当销售额大于1800时按照20%提佣金。</p>
+           
                 </div>
             </el-row>
             <el-row>
@@ -18,13 +18,7 @@
                                 <el-table-column prop="address" label="Address" />
                             </el-table>
                         </el-tab-pane>
-                        <el-tab-pane label="等价类法" name="second">
-                            <el-table :data="tableData" height="250" style="width: 100%">
-                                <el-table-column prop="date" label="Date" width="180" />
-                                <el-table-column prop="name" label="Name" width="180" />
-                                <el-table-column prop="address" label="Address" />
-                            </el-table>
-                        </el-tab-pane>
+                    
     
                     </el-tabs>
                 </div>
