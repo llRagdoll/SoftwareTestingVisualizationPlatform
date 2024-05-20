@@ -4,21 +4,28 @@
             <el-row style="height:30%">
                 <div class="question-card">
                     <p class="question-title">万年历问题</p>
+                    <p class="question-content">输入三个整数y,m,d，分别表示年、月、日，输出它的下一天日期。</p>
+                    <p class="question-content">其中，年份的取值范围在1900和2100之间。</p>
                 </div>
             </el-row>
             <el-row>
                 <div class="testcase-card">
                     <el-tabs v-model="activeName"  @tab-click="handleClick">
-                        <el-tab-pane label="User" name="first">
+                        <el-tab-pane label="边界值法" name="first">
                             <el-table :data="tableData" height="250" style="width: 100%">
                                 <el-table-column prop="date" label="Date" width="180" />
                                 <el-table-column prop="name" label="Name" width="180" />
                                 <el-table-column prop="address" label="Address" />
                             </el-table>
                         </el-tab-pane>
-                        <el-tab-pane label="Config" name="second">Config</el-tab-pane>
-                        <el-tab-pane label="Role" name="third">Role</el-tab-pane>
-                        <el-tab-pane label="Task" name="fourth">Task</el-tab-pane>
+                        <el-tab-pane label="等价类法" name="second">
+                            <el-table :data="tableData" height="250" style="width: 100%">
+                                <el-table-column prop="date" label="Date" width="180" />
+                                <el-table-column prop="name" label="Name" width="180" />
+                                <el-table-column prop="address" label="Address" />
+                            </el-table>
+                        </el-tab-pane>
+    
                     </el-tabs>
                 </div>
             </el-row>
@@ -26,12 +33,12 @@
         <el-col :span="9">
             <div class="run-chart">
                 <div class="input-area">
-                    <p>测试输入</p>
-                    <el-input placeholder="请输入测试用例编号"></el-input>
-                    <p>边长1：12</p>
-                    <p>边长2：12</p>
-                    <p>边长3：12</p>
-                    <el-button type="warning" plain class="run-button">运行</el-button>
+                    <p style="font-weight: bold;">测试输入</p>
+                    <el-input placeholder="请输入测试用例编号" style="width:80%"></el-input>
+                    <p>年：12</p>
+                    <p>月：12</p>
+                    <p>日：12</p>
+                    <el-button type="warning" plain class="run-button"  style="width:80%">运行</el-button>
                 </div>
                 <div class="chart-area">
                   这是一张图
@@ -42,6 +49,7 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
 const tableData = [
   {
     date: '2016-05-03',
@@ -79,6 +87,8 @@ const tableData = [
     address: 'No. 189, Grove St, Los Angeles',
   },
 ]
+
+const activeName = ref('first')
 </script>
 
 <style>
@@ -94,6 +104,11 @@ const tableData = [
 .question-title{
     font-size: 20px;
     color: #ffffff;
+}
+
+.question-content{
+    color: #ffffff;
+    font-size: 14px;
 }
 
 .testcase-card{
