@@ -3,7 +3,7 @@ import os
 from flask_cors import CORS, cross_origin
 from flask import Flask, request, make_response, jsonify
 import pandas as pd
-import solution
+#import solution
 
 app = Flask(__name__)
 cors = CORS(app)
