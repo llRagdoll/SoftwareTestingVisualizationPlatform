@@ -1,60 +1,63 @@
 <template>
-    <el-row style="height:95vh">
-        <el-col :span="15">
-            <el-row style="height:30%">
-                <div class="question-card">
-                    <p class="question-title">万年历问题</p>
-                    <p class="question-content">输入三个整数y,m,d，分别表示年、月、日，输出它的下一天日期。</p>
-                    <p class="question-content">其中，年份的取值范围在1900和2100之间。</p>
-                </div>
-            </el-row>
-            <el-row>
-                <div class="testcase-card">
-                    <el-tabs v-model="activeName"  @tab-click="handleClick">
-                        <el-tab-pane label="边界值法" name="first">
-                            <el-table :data="tableData" height="250" style="width: 100%">
-                                <el-table-column prop="date" label="Date" width="180" />
-                                <el-table-column prop="name" label="Name" width="180" />
-                                <el-table-column prop="address" label="Address" />
-                            </el-table>
-                        </el-tab-pane>
-                        <el-tab-pane label="等价类法" name="second">
-                            <el-table :data="tableData" height="250" style="width: 100%">
-                                <el-table-column prop="date" label="Date" width="180" />
-                                <el-table-column prop="name" label="Name" width="180" />
-                                <el-table-column prop="address" label="Address" />
-                            </el-table>
-                        </el-tab-pane>
-    
-                    </el-tabs>
-                </div>
-            </el-row>
-        </el-col>
-        <el-col :span="9">
-            <div class="run-chart">
-                <div class="input-area">
-                    <p style="font-weight: bold;">测试输入</p>
-                    <el-input placeholder="请输入测试用例编号" style="width:80%"></el-input>
-                    <p>年：12</p>
-                    <p>月：12</p>
-                    <p>日：12</p>
-                    <el-button type="warning" plain class="run-button"  style="width:80%">运行</el-button>
-                </div>
-                <div class="chart-area">
-                    <div v-show="chartType === 'bar'" id="barChart" class="chart-container" ref="barChartRef" style="width:100%;height:35vh;"></div>
-                    <div v-show="chartType === 'pie'" id="pieChart" class="chart-container" ref="pieChartRef" style="width:100%;height:35vh;"></div>
-                </div>
-            </div>
-        </el-col>
-    </el-row>
+  <el-row style="height:95vh">
+    <el-col :span="15">
+      <el-row style="height:30%">
+        <div class="question-card">
+          <p class="question-title">万年历问题</p>
+          <p class="question-content">输入三个整数y,m,d，分别表示年、月、日，输出它的下一天日期。</p>
+          <p class="question-content">其中，年份的取值范围在1900和2100之间。</p>
+        </div>
+      </el-row>
+      <el-row>
+        <div class="testcase-card">
+          <el-tabs v-model="activeName" @tab-click="handleClick">
+            <el-tab-pane label="边界值法" name="first">
+              <el-table :data="tableData" height="250" style="width: 100%">
+                <el-table-column prop="date" label="Date" width="180" />
+                <el-table-column prop="name" label="Name" width="180" />
+                <el-table-column prop="address" label="Address" />
+              </el-table>
+            </el-tab-pane>
+            <el-tab-pane label="等价类法" name="second">
+              <el-table :data="tableData" height="250" style="width: 100%">
+                <el-table-column prop="date" label="Date" width="180" />
+                <el-table-column prop="name" label="Name" width="180" />
+                <el-table-column prop="address" label="Address" />
+              </el-table>
+            </el-tab-pane>
+
+          </el-tabs>
+        </div>
+      </el-row>
+    </el-col>
+    <el-col :span="9">
+      <div class="run-chart">
+        <div class="input-area">
+          <p style="font-weight: bold;">测试输入</p>
+          <el-input placeholder="请输入测试用例编号" style="width:80%"></el-input>
+          <p>年：12</p>
+          <p>月：12</p>
+          <p>日：12</p>
+          <el-button type="warning" plain class="run-button" style="width:80%">运行</el-button>
+        </div>
+        <div class="chart-area">
+          <div v-show="chartType === 'bar'" id="barChart" class="chart-container" ref="barChartRef"
+            style="width:100%;height:35vh;"></div>
+          <div v-show="chartType === 'pie'" id="pieChart" class="chart-container" ref="pieChartRef"
+            style="width:100%;height:35vh;"></div>
+        </div>
+      </div>
+    </el-col>
+  </el-row>
 </template>
 
 <script setup>
 import * as echarts from 'echarts';
-import { ref ,onMounted} from 'vue';
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
 
 const chartType = ref('bar');
-const noData = ref(false); 
+const noData = ref(false);
 const commonData = {
   '待办': 3,
   '进行中': 4,
@@ -64,8 +67,9 @@ const commonData = {
 const barChartRef = ref(null);
 const pieChartRef = ref(null);
 
+
 const getBarOption = () => ({
-    title: {
+  title: {
     text: '',
     left: 'center'
   },
@@ -78,18 +82,18 @@ const getBarOption = () => ({
     name: '数量',
     type: 'bar',
     data: Object.values(commonData).map((value, index) => {
-            return {
-                value: value,
-                itemStyle: {
-                    color: index === 0 ? '#D8E5F9' : (index === 1 ? '#F2DABD' : '#DFF3DF') // 浅蓝, 浅橙, 浅绿
-                }
-            };
-        })
+      return {
+        value: value,
+        itemStyle: {
+          color: index === 0 ? '#D8E5F9' : (index === 1 ? '#F2DABD' : '#DFF3DF') // 浅蓝, 浅橙, 浅绿
+        }
+      };
+    })
   }]
 });
 
 const getPieOption = () => ({
-    title: {
+  title: {
     text: '',
     left: 'center'
   },
@@ -102,28 +106,28 @@ const getPieOption = () => ({
       type: 'pie',
       radius: '55%',
       data: Object.entries(commonData).map(([name, value]) => {
-                let color;
-                switch (name) {
-                    case '待办任务':
-                        color = '#D8E5F9'; // 浅蓝
-                        break;
-                    case '进行中':
-                        color = '#F2DABD'; // 浅橙
-                        break;
-                    case '已完成':
-                        color = '#DFF3DF'; // 浅绿
-                        break;
-                    default:
-                        color = '#D3D3D3';
-                }
-                return { 
-                    name: name, 
-                    value: value,
-                    itemStyle: {
-                        color: color
-                    }
-                };
-            }),
+        let color;
+        switch (name) {
+          case '待办任务':
+            color = '#D8E5F9'; // 浅蓝
+            break;
+          case '进行中':
+            color = '#F2DABD'; // 浅橙
+            break;
+          case '已完成':
+            color = '#DFF3DF'; // 浅绿
+            break;
+          default:
+            color = '#D3D3D3';
+        }
+        return {
+          name: name,
+          value: value,
+          itemStyle: {
+            color: color
+          }
+        };
+      }),
       emphasis: {
         itemStyle: {
           shadowBlur: 10,
@@ -164,9 +168,22 @@ const initChart = (type) => {
   }
 };
 
+function Testtest() {
+  axios.post("http://localhost:9092/api/test").then(response => {
+    console.log(response.data);
+  })
+    .catch(error => {
+      console.error("请求出错：", error)
+    })
+}
+
 onMounted(() => {
   initChart(chartType.value);
+  //接口连接test
+  Testtest();
 });
+
+
 const tableData = [
   {
     date: '2016-05-03',
@@ -209,54 +226,54 @@ const activeName = ref('first')
 </script>
 
 <style>
-.question-card{
-    width: 100%;
-    height: 24vh;
-    background-color: #53B5B2;
-    border-radius: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding:10px
+.question-card {
+  width: 100%;
+  height: 24vh;
+  background-color: #53B5B2;
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px
 }
 
-.question-title{
-    font-size: 20px;
-    color: #ffffff;
+.question-title {
+  font-size: 20px;
+  color: #ffffff;
 }
 
-.question-content{
-    color: #ffffff;
-    font-size: 14px;
+.question-content {
+  color: #ffffff;
+  font-size: 14px;
 }
 
-.testcase-card{
-    width: 100%;
-    height: 65vh;
-    background-color: #ffffff;
-    border-radius: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding:10px
+.testcase-card {
+  width: 100%;
+  height: 65vh;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px
 }
 
-.run-chart{
-    width: 90%;
-    height: 93.5vh;
-    background-color: #ffffff;
-    border-radius: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-left:5%;
-    padding:10px
+.run-chart {
+  width: 90%;
+  height: 93.5vh;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-left: 5%;
+  padding: 10px
 }
 
-.input-area{
-    height:50%
+.input-area {
+  height: 50%
 }
 
-.chart-area{
-    height:50%
+.chart-area {
+  height: 50%
 }
 
-.run-button{
-    width:90%;
-    
+.run-button {
+  width: 90%;
+
 }
 </style>
