@@ -1,8 +1,5 @@
 
 def triangle(a,b,c):
-    if not (isinstance(a, int) and isinstance(b, int) and isinstance(c, int)):
-        return "a, b, c 必须是整数"
-
     if a < 1 or a > 1000:
         return "a不在取值范围内"
     if b < 1 or b > 1000:

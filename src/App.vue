@@ -19,13 +19,13 @@
       >
         <el-sub-menu index="1">
           <template #title >
-            <el-icon><location /></el-icon>
+            <el-icon><Notebook /></el-icon>
             <span>练习题</span>
           </template>
           <el-menu-item-group>
-            <el-menu-item index="/triangle">判断三角形</el-menu-item>
-            <el-menu-item index="/wannianli">万年历问题</el-menu-item>
-            <el-menu-item index="/computersale">电脑销售系统</el-menu-item> 
+            <el-menu-item index="/triangle"><el-icon><Position /></el-icon>判断三角形</el-menu-item>
+            <el-menu-item index="/wannianli"><el-icon><Position /></el-icon>万年历问题</el-menu-item>
+            <el-menu-item index="/computersale"><el-icon><Position /></el-icon>电脑销售系统</el-menu-item> 
           </el-menu-item-group>
            
         </el-sub-menu>
@@ -47,6 +47,18 @@
 
 <script setup>
 import { ref } from 'vue'
+import {Notebook,Position}from '@element-plus/icons-vue'
+
+import { debounce } from "lodash";
+const resizeObserver  = window.ResizeObserver;
+window.ResizeObserver = class ResizeObserver extends resizeObserver {
+  constructor(callback) {
+    // 使用 debounce 函数包装回调函数，使其在调用间隔 100 毫秒内不会重复调用
+    callback = debounce(callback, 100);
+    // 调用父类的构造函数，传递包装后的回调函数
+    super(callback);
+  }
+};
 const openeds = ref(['1', '3'])
 </script>
 
