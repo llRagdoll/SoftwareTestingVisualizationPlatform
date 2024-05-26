@@ -66,3 +66,33 @@ def computer(hosts, monitors, peripherals):
         commission = total_sales * 0.20
     
     return total_sales, commission
+
+# T13.销售问题-计算佣金
+# 题目规定值
+CR_High = 7
+CR_Medium = 6
+CR_Low = 5
+AS = 2000000
+LD = 10
+CCR_High = 0.85
+CCR_Medium = 0.60
+
+def calculate_commission(sales, leave_days, cash_received_ratio):
+    print(sales, leave_days, cash_received_ratio)
+    if (sales>=0) and (leave_days>=0 and leave_days<=365)and (cash_received_ratio>=0 and cash_received_ratio<=1):
+        if sales > AS and leave_days <= LD:
+            if cash_received_ratio >= CCR_Medium:
+                commission_coefficient = CR_High
+                commission = sales / commission_coefficient
+            else:
+                commission = 0
+        else:
+            if cash_received_ratio <= CCR_High:
+                commission_coefficient = CR_Medium
+            else:
+                commission_coefficient = CR_Low
+            commission = (sales / commission_coefficient)
+    else:
+        return -1
+
+    return commission
