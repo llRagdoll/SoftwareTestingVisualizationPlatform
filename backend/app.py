@@ -2,7 +2,7 @@ import json
 import os
 from flask_cors import CORS, cross_origin
 from flask import Flask, request, make_response, jsonify
-import pandas as pd
+
 import program
 
 app = Flask(__name__)
@@ -94,6 +94,22 @@ def salesCommission():
     }
     return jsonify(data)
 
+
+# T7. 电信收费问题
+@app.route('/api/telecom', methods=['POST', 'GET'])
+def telecomCharge():
+    if request.method == 'GET':
+        # 从请求中获取参数
+        param1 = int(request.args.get('time'))
+        param2 = int(request.args.get('count'))
+
+        # 调用程序
+        result = program.telecom(param1, param2)
+
+    data = {
+        'result': result
+    }
+    return jsonify(data)
 
 
 if __name__ == '__main__':

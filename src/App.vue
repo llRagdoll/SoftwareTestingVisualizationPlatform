@@ -26,6 +26,7 @@
             <el-menu-item index="/triangle"><el-icon><Position /></el-icon>判断三角形</el-menu-item>
             <el-menu-item index="/wannianli"><el-icon><Position /></el-icon>万年历问题</el-menu-item>
             <el-menu-item index="/computersale"><el-icon><Position /></el-icon>电脑销售系统</el-menu-item>
+            <el-menu-item index="/telecom"><el-icon><Position /></el-icon>电信收费问题</el-menu-item>
             <el-menu-item index="/salesCommission"><el-icon><Position /></el-icon>销售问题</el-menu-item>
           </el-menu-item-group>
            
