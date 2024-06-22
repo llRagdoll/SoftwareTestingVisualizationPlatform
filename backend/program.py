@@ -66,3 +66,62 @@ def computer(hosts, monitors, peripherals):
         commission = total_sales * 0.20
     
     return total_sales, commission
+
+# T13.销售问题-计算佣金
+# 题目规定值
+CR_High = 7
+CR_Medium = 6
+CR_Low = 5
+AS = 2000000
+LD = 10
+CCR_High = 0.85
+CCR_Medium = 0.60
+
+def calculate_commission(sales, leave_days, cash_received_ratio):
+    print(sales, leave_days, cash_received_ratio)
+    if (sales>=0) and (leave_days>=0 and leave_days<=365)and (cash_received_ratio>=0 and cash_received_ratio<=1):
+        if sales > AS and leave_days <= LD:
+            if cash_received_ratio >= CCR_Medium:
+                commission_coefficient = CR_High
+                commission = sales / commission_coefficient
+            else:
+                commission = 0
+        else:
+            if cash_received_ratio <= CCR_High:
+                commission_coefficient = CR_Medium
+            else:
+                commission_coefficient = CR_Low
+            commission = (sales / commission_coefficient)
+    else:
+        return -1
+
+    return commission
+
+
+def telecom(time, count):
+    if 0 <= time <= 60:
+        if count <= 1:
+            return 0.01
+        else:
+            return 0
+    elif 60 < time <= 120:
+        if count <= 2:
+            return 0.015
+        else:
+            return 0
+    elif 120 < time <= 180:
+        if count <= 3:
+            return 0.02
+        else:
+            return 0
+    elif 180 < time <= 300:
+        if count <= 3:
+            return 0.025
+        else:
+            return 0
+    else:
+        if count <= 6:
+            return 0.03
+        else:
+            return 0
+

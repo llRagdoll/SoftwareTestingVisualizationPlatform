@@ -15,18 +15,18 @@
                         <el-tab-pane label="边界值法" name="first">
                           <el-table :data="testCases" style="width: 100%;" max-height="450">
                             <el-table-column prop="id" label="用例编号" width="150"></el-table-column>
-                            <el-table-column prop="a" label="a"></el-table-column>
-                            <el-table-column prop="b" label="b"></el-table-column>
-                            <el-table-column prop="c" label="c"></el-table-column>
+                            <el-table-column prop="a" label="a" width="100"></el-table-column>
+                            <el-table-column prop="b" label="b" width="100"></el-table-column>
+                            <el-table-column prop="c" label="c" width="100"></el-table-column>
                             <el-table-column prop="expectedOutput" label="预期输出"></el-table-column>
                           </el-table>
                         </el-tab-pane>
                         <el-tab-pane label="等价类法" name="second">
                           <el-table :data="testCases2" style="width: 100%;" max-height="450">
                             <el-table-column prop="id" label="用例编号" width="150"></el-table-column>
-                            <el-table-column prop="a" label="a"></el-table-column>
-                            <el-table-column prop="b" label="b"></el-table-column>
-                            <el-table-column prop="c" label="c"></el-table-column>
+                            <el-table-column prop="a" label="a" width="100"></el-table-column>
+                            <el-table-column prop="b" label="b" width="100"></el-table-column>
+                            <el-table-column prop="c" label="c" width="100"></el-table-column>
                             <el-table-column prop="expectedOutput" label="预期输出"></el-table-column>
                           </el-table>
                         </el-tab-pane>
