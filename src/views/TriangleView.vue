@@ -57,7 +57,7 @@
                     <div v-show="chartType === 'bar'" id="barChart" class="chart-container" ref="barChartRef" style="width:100%;height:35vh;"></div>
                     <div v-show="chartType === 'pie'" id="pieChart" class="chart-container" ref="pieChartRef" style="width:100%;height:35vh;"></div>
                     <p>{{ result }}</p>
-                    <p>{{ result[0] }}</p>
+                    
                 </div>
             </div>
         </el-col>
