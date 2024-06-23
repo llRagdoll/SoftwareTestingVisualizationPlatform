@@ -2,6 +2,8 @@ import json
 import os
 from flask_cors import CORS, cross_origin
 from flask import Flask, request, make_response, jsonify
+from test_refusejoin import run_team_test
+from test_addComment import run_note_test
 
 import program
 
@@ -111,6 +113,29 @@ def telecomCharge():
     }
     return jsonify(data)
 
+
+@app.route('/api/teamsystem', methods=['POST', 'GET'])
+def teamsystem():
+
+    # 调用程序
+    result = run_team_test()
+
+    data = {
+        'result': result
+    }
+    return jsonify(data)
+
+
+
+@app.route('/api/notesystem', methods=['POST', 'GET'])
+def notesystem():
+        # 调用程序
+        result = run_note_test()
+    
+        data = {
+            'result': result
+        }
+        return jsonify(data)
 
 if __name__ == '__main__':
     app.run(port=9092) # 可以指定运行的主机IP地址，端口，是否开启调试模式

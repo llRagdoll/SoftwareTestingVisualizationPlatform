@@ -7,12 +7,19 @@
           <p class="question-content">A. 每月的电话总费用=基本月租费+折扣后的实际的通话费，如果没有折扣则按实际通话费计算，基本月租费为25元，每分钟通话费为0.15元。
             B. 实际通话费是否有折扣与当月的通话时间（分钟）和本年度至本月的累计未按时缴费的次数有关。
             C. 当月的通话分钟数和折扣比例及本年度未按时缴费次数之间有直接的对应关系，如果本年度的未按时缴费的次数超过本月通话时间所对应的容许值则免于折扣，并按实际的通话费计算。
-            D. 通话时间和折扣比例及未按时缴费次数的关系为：</p>
-          <el-table :data="discountData" style="width: 100%;" max-height="120">
+            D. 通话时间和折扣比例及未按时缴费次数的关系详见题目</p>
+          <!-- <el-table :data="discountData" style="width: 100%;" max-height="120">
             <el-table-column prop="time" label="本月通话的分钟数" width="240"></el-table-column>
             <el-table-column prop="count" label="通话时间段的最大容许不按时缴费次数" width="320"></el-table-column>
             <el-table-column prop="discount" label="通话时间段的折扣率"></el-table-column>
-          </el-table>
+          </el-table> -->
+          <!-- <div class="discount-list">
+            <div class="discount-item" v-for="item in discountData" :key="item.time">
+              <div class="discount-time">本月通话的分钟数: {{ item.time }}</div>
+              <div class="discount-count">通话时间段的最大容许不按时缴费次数: {{ item.count }}</div>
+              <div class="discount-rate">通话时间段的折扣率: {{ item.discount }}</div>
+            </div>
+          </div> -->
         </div>
       </el-row>
       <el-row>
@@ -64,33 +71,33 @@ import axios from 'axios';
 import { ElMessage } from 'element-plus';
 
 
-const discountData = [
-  {
-    time: '0＜通话时间≤60',
-    count: '1',
-    discount: '1.0％',
-  },
-  {
-    time: '60＜通话时间≤120',
-    count: '2',
-    discount: '1.5％',
-  },
-  {
-    time: '120＜通话时间≤180',
-    count: '3',
-    discount: '2.0％',
-  },
-  {
-    time: '180＜通话时间≤300 ',
-    count: '3',
-    discount: '2.5％',
-  },
-  {
-    time: '300＜通话时间',
-    count: '6',
-    discount: '3.0％',
-  }
-];
+// const discountData = [
+//   {
+//     time: '0＜通话时间≤60',
+//     count: '1',
+//     discount: '1.0％',
+//   },
+//   {
+//     time: '60＜通话时间≤120',
+//     count: '2',
+//     discount: '1.5％',
+//   },
+//   {
+//     time: '120＜通话时间≤180',
+//     count: '3',
+//     discount: '2.0％',
+//   },
+//   {
+//     time: '180＜通话时间≤300 ',
+//     count: '3',
+//     discount: '2.5％',
+//   },
+//   {
+//     time: '300＜通话时间',
+//     count: '6',
+//     discount: '3.0％',
+//   }
+// ];
 
 const testCases = [
   { id: 'TC-TC-001', time: 1, count: 0, expectedDiscount: 1.0 },
@@ -170,7 +177,7 @@ const runTest = () => {
 <style>
 .telecom-question-card{
   width: 100%;
-  height: 36vh;
+  height: 24vh;
   background-color: #53B5B2;
   border-radius: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -190,7 +197,7 @@ const runTest = () => {
 .telecom-testcase-card{
   margin-top: 20px;
   width: 100%;
-  height: 55vh;
+  height: 65vh;
   background-color: #ffffff;
   border-radius: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -218,6 +225,27 @@ const runTest = () => {
 .run-button{
   width:90%;
 
+}
+
+.discount-list {
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.discount-item {
+  padding: 15px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.discount-item:last-child {
+  border-bottom: none;
+}
+
+.discount-time, .discount-count, .discount-rate {
+  margin: 5px 0;
+  font-size: 16px;
+  color: #333;
 }
 
 </style>

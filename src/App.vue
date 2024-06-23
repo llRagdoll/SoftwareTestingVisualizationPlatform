@@ -16,6 +16,7 @@
         collapse-transition="false"
         default-expand-all="true"
         :default-openeds="openeds"
+        :unique-opened="true"
       >
         <el-sub-menu index="1">
           <template #title >
@@ -31,10 +32,48 @@
           </el-menu-item-group>
            
         </el-sub-menu>
-        <el-menu-item index="empty">
-          <el-icon><icon-menu /></el-icon>
-          <span></span>
-        </el-menu-item>
+        <el-sub-menu index="2">
+          <template #title >
+            <el-icon><Notebook /></el-icon>
+            <span>单元测试</span>
+          </template>
+          <el-menu-item-group>
+            <el-menu-item index="/trackunit"><el-icon><Position /></el-icon>轨迹子系统</el-menu-item>
+            <el-menu-item index="/attractionunit"><el-icon><Position /></el-icon>景区子系统</el-menu-item>
+            <el-menu-item index="/noteunit"><el-icon><Position /></el-icon>随记子系统</el-menu-item>
+            <el-menu-item index="/teamunit"><el-icon><Position /></el-icon>小队子系统</el-menu-item>
+            <el-menu-item index="/userunit"><el-icon><Position /></el-icon>个人子系统</el-menu-item>
+          </el-menu-item-group>
+           
+        </el-sub-menu>
+        <el-sub-menu index="3">
+          <template #title >
+            <el-icon><Notebook /></el-icon>
+            <span>集成测试</span>
+          </template>
+          <el-menu-item-group>
+            <el-menu-item index="/trackintegrate"><el-icon><Position /></el-icon>轨迹子系统</el-menu-item>
+            <el-menu-item index="/attractionintegrate"><el-icon><Position /></el-icon>景区子系统</el-menu-item>
+            <el-menu-item index="/noteintegrate"><el-icon><Position /></el-icon>随记子系统</el-menu-item>
+            <el-menu-item index="/teamintegrate"><el-icon><Position /></el-icon>小队子系统</el-menu-item>
+            <el-menu-item index="/userintegrate"><el-icon><Position /></el-icon>个人子系统</el-menu-item>
+          </el-menu-item-group>
+           
+        </el-sub-menu>
+        <el-sub-menu index="4">
+          <template #title >
+            <el-icon><Notebook /></el-icon>
+            <span>系统测试</span>
+          </template>
+          <el-menu-item-group>
+            <el-menu-item index="/tracksystem"><el-icon><Position /></el-icon>轨迹子系统</el-menu-item>
+            <el-menu-item index="/attractionsystem"><el-icon><Position /></el-icon>景区子系统</el-menu-item>
+            <el-menu-item index="/notesystem"><el-icon><Position /></el-icon>随记子系统</el-menu-item>
+            <el-menu-item index="/teamsystem"><el-icon><Position /></el-icon>小队子系统</el-menu-item>
+            <el-menu-item index="/usersystem"><el-icon><Position /></el-icon>个人子系统</el-menu-item>
+          </el-menu-item-group>
+           
+        </el-sub-menu>
       </el-menu>
     </div>
         </div>
@@ -61,7 +100,7 @@ window.ResizeObserver = class ResizeObserver extends resizeObserver {
     super(callback);
   }
 };
-const openeds = ref(['1', '3'])
+const openeds = ref(['1'])
 </script>
 
 <style>
