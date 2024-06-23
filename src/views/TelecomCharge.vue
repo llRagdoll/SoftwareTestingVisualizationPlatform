@@ -151,7 +151,7 @@ const runTest = () => {
     ElMessage.error('请输入正确的测试用例！');
     return;
   }
-  axios.get('/api/telecom', {
+  axios.get('http://localhost:9092/api/telecom', {
     params: {
       time: testCase.value.time,
       count: testCase.value.count

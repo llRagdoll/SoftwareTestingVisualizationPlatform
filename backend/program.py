@@ -101,27 +101,27 @@ def calculate_commission(sales, leave_days, cash_received_ratio):
 def telecom(time, count):
     if 0 <= time <= 60:
         if count <= 1:
-            return 0.01
+            return 1
         else:
             return 0
     elif 60 < time <= 120:
         if count <= 2:
-            return 0.015
+            return 1.5
         else:
             return 0
     elif 120 < time <= 180:
         if count <= 3:
-            return 0.02
+            return 2
         else:
             return 0
     elif 180 < time <= 300:
         if count <= 3:
-            return 0.025
+            return 2.5
         else:
             return 0
     else:
         if count <= 6:
-            return 0.03
+            return 3
         else:
             return 0
 
